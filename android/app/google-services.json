@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "567754490733",
+    "firebase_url": "https://jumia-db-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "jumia-db",
+    "storage_bucket": "jumia-db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567754490733:android:942f5c9afe3f3ee345d064",
+        "android_client_info": {
+          "package_name": "com.futureTeam.jumia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "567754490733-t15h24rjai9l8mnsuo1k0pqscgvqlrdm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.futureTeam.jumia",
+            "certificate_hash": "761e35278447019ff7146adaea5cca876cdd2856"
+          }
+        },
+        {
+          "client_id": "567754490733-t6cd07orgh45gtkskdks9802impa5mdc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqpYIP1FzYU7hBeJok2BccWaIcvMpswqQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "567754490733-t6cd07orgh45gtkskdks9802impa5mdc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
