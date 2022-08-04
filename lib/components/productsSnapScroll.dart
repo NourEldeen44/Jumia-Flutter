@@ -57,7 +57,7 @@ class _ProductsSnapScrollState extends State<ProductsSnapScroll> {
       ),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasError) {}
-        if (snapshot.connectionState == ConnectionState.waiting) {
+        if (!snapshot.hasData) {
           return FittedBox(
             child: Shimmer.fromColors(
                 baseColor: Colors.grey,
@@ -73,9 +73,9 @@ class _ProductsSnapScrollState extends State<ProductsSnapScroll> {
                     ))),
           );
         }
-        if (snapshot.connectionState == ConnectionState.done) {
-          setLoadingToDone();
-        }
+        // if (snapshot.connectionState == ConnectionState.done) {
+        //   setLoadingToDone();
+        // }
         // Map<String, dynamic> productData = snapshot.data!.data() as Map<String, dynamic>;
         final data = snapshot.requireData;
         return Container(
@@ -118,28 +118,24 @@ class Product extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
-                          child: CachedNetworkImage(
-                            fadeInDuration: Duration(milliseconds: 500),
-                            fadeOutDuration: Duration(milliseconds: 100),
-                            imageUrl: productData['imgurl'],
-                            placeholder: (context, url) => Shimmer.fromColors(
-                                baseColor: Colors.grey,
-                                highlightColor: (Colors.grey[100])!,
-                                child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 3,
-                                    child: Image(
-                                      image: defaultTargetPlatform ==
-                                                  TargetPlatform.android ||
-                                              defaultTargetPlatform ==
-                                                  TargetPlatform.iOS
-                                          ? const AssetImage(
-                                              "images/loading.png")
-                                          : const AssetImage(
-                                              "../../images/loading.png"),
-                                    ))),
-                          ),
+                        CachedNetworkImage(
+                          fadeInDuration: Duration(milliseconds: 500),
+                          fadeOutDuration: Duration(milliseconds: 100),
+                          imageUrl: productData['imgurl'],
+                          placeholder: (context, url) => Shimmer.fromColors(
+                              baseColor: Colors.grey,
+                              highlightColor: (Colors.grey[100])!,
+                              child: Container(
+                                  width: MediaQuery.of(context).size.width / 3,
+                                  child: Image(
+                                    image: defaultTargetPlatform ==
+                                                TargetPlatform.android ||
+                                            defaultTargetPlatform ==
+                                                TargetPlatform.iOS
+                                        ? const AssetImage("images/loading.png")
+                                        : const AssetImage(
+                                            "../../images/loading.png"),
+                                  ))),
                         ),
                         Container(
                             padding: const EdgeInsetsDirectional.only(

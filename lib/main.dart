@@ -76,6 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
         : Directionality(
             textDirection: TextDirection.ltr,
             child: Scaffold(
+              backgroundColor: Color.fromRGBO(245, 245, 245, 1),
               body: screens[btmSelectedIndex],
               // Bottom Bar
               bottomNavigationBar: BottomNavigationBar(
@@ -107,7 +108,24 @@ class _MyHomePageState extends State<MyHomePage> {
                   });
                 },
               ),
-            ),
-          );
+              appBar: AppBar(
+                elevation: 0,
+                title: const Text(
+                  "Jumia",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              floatingActionButton: FloatingActionButton(
+                  child: Icon(
+                    Icons.refresh,
+                    color: Colors.white,
+                  ),
+                  onPressed: () async {
+                    // Restart.restartApp();
+                    setState(() {
+                      key = UniqueKey();
+                    });
+                  }),
+            ));
   }
 }
