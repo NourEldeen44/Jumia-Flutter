@@ -5,7 +5,7 @@ class DataBase {
   final colRef;
   // FirebaseFirestore.instance.collection("products");
 
-  Stream<DocumentSnapshot> getSingleProductStream(String id) {
+  Stream<DocumentSnapshot> getSingleDocumentStream(String id) {
     return colRef.doc(id).snapshots();
   }
 

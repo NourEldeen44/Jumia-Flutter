@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:jumia/DataBase.dart';
 import 'package:jumia/screens/home.dart';
 import 'package:jumia/screens/splashScreen.dart';
+import 'package:jumia/screens/user.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
       DataBase(colRef: FirebaseFirestore.instance.collection("products"));
   bool insplashScreen = true;
   int btmSelectedIndex = 0;
-  List screens = [Home(), SplashScreen(), Home(), SplashScreen(), Home()];
+  List screens = [Home(), SplashScreen(), Home(), UserScreen(), Home()];
   @override
   void initState() {
     super.initState();

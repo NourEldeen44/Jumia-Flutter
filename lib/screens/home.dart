@@ -5,7 +5,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:restart_app/restart_app.dart';
 import 'package:shimmer/shimmer.dart';
 import '../DataBase.dart';
 import '../components/productsSnapScroll.dart';
