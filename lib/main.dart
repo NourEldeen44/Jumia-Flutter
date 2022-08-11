@@ -5,6 +5,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:jumia/DataBase.dart';
+import 'package:jumia/screens/cart.dart';
+import 'package:jumia/screens/categories.dart';
 import 'package:jumia/screens/home.dart';
 import 'package:jumia/screens/splashScreen.dart';
 import 'package:jumia/screens/user.dart';
@@ -30,18 +32,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Jumia Demo',
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(
+        title: 'Jumia Demo Home Page',
+        firstLoad: true,
+        btmSelectedIndex: 0,
+      ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
+  const MyHomePage(
+      {Key? key,
+      required this.title,
+      required this.firstLoad,
+      required this.btmSelectedIndex})
+      : super(key: key);
+  final bool firstLoad;
+  final int btmSelectedIndex;
   final String title;
 
   @override
@@ -54,18 +66,27 @@ class _MyHomePageState extends State<MyHomePage> {
       DataBase(colRef: FirebaseFirestore.instance.collection("products"));
   bool insplashScreen = true;
   int btmSelectedIndex = 0;
-  List screens = [Home(), SplashScreen(), Home(), UserScreen(), Home()];
+  List screens = [Home(), Categories(), Cart(), UserScreen(), Home()];
   @override
   void initState() {
     super.initState();
+    setState(() {
+      btmSelectedIndex = widget.btmSelectedIndex;
+    });
     navigateToHome();
   }
 
   navigateToHome() async {
-    await Future.delayed(Duration(seconds: 3), () {});
-    setState(() {
-      insplashScreen = false;
-    });
+    if (widget.firstLoad) {
+      await Future.delayed(Duration(seconds: 3), () {});
+      setState(() {
+        insplashScreen = false;
+      });
+    } else {
+      setState(() {
+        insplashScreen = false;
+      });
+    }
     // Navigator.pushReplacement(
     //     context, MaterialPageRoute(builder: (context) => Home()));
   }
@@ -89,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.format_list_bulleted_outlined),
                       label: "Categories"),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.cast), label: "Feed"),
+                      icon: Icon(Icons.shopping_cart_checkout), label: "Cart"),
                   BottomNavigationBarItem(
                       icon: Icon(Icons.person_outline), label: "Account"),
                   BottomNavigationBarItem(
@@ -122,8 +143,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.white,
                   ),
                   onPressed: () async {
-                    // Restart.restartApp();
                     setState(() {
+                      // Restart.restartApp();
                       key = UniqueKey();
                     });
                   }),

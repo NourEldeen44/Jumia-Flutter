@@ -39,6 +39,8 @@ dependencies:
   restart_app: ^1.1.0+1
   shared_preferences: ^2.0.15
   fluttertoast: ^8.0.9
+  animations: ^2.0.3
+  flutter_braintree: ^2.3.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -47,7 +49,13 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.10.0"
 
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "images/appicon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
