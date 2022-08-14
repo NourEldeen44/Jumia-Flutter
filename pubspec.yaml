@@ -41,6 +41,7 @@ dependencies:
   fluttertoast: ^8.0.9
   animations: ^2.0.3
   flutter_braintree: ^2.3.1
+  firebase_messaging: ^12.0.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -50,6 +51,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: "^0.10.0"
+  flutter_native_splash: ^2.2.7
+flutter_native_splash:
+  color: "#ff9900"
+  image: images/appicon.png
 
 flutter_icons:
   android: true

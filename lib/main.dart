@@ -2,8 +2,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:jumia/DataBase.dart';
 import 'package:jumia/screens/cart.dart';
 import 'package:jumia/screens/categories.dart';
@@ -12,10 +14,23 @@ import 'package:jumia/screens/splashScreen.dart';
 import 'package:jumia/screens/user.dart';
 
 Future main() async {
+  Future<void> _firebaseMessagingBackgroundHandler(
+      RemoteMessage message) async {
+    // If you're going to use other Firebase services in the background, such as Firestore,
+    // make sure you call `initializeApp` before using other Firebase services.
+    await Firebase.initializeApp();
+    Fluttertoast.showToast(
+        msg: "you Have a new notification!",
+        textColor: Colors.white,
+        backgroundColor: Colors.orange[400]);
+  }
+
   WidgetsFlutterBinding.ensureInitialized();
   if (defaultTargetPlatform == TargetPlatform.android ||
       defaultTargetPlatform == TargetPlatform.iOS) {
     await Firebase.initializeApp();
+    await FirebaseMessaging.instance.setAutoInitEnabled(true);
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   } else {
     await Firebase.initializeApp(
         options: const FirebaseOptions(
@@ -67,15 +82,17 @@ class _MyHomePageState extends State<MyHomePage> {
   bool insplashScreen = true;
   int btmSelectedIndex = 0;
   List screens = [Home(), Categories(), Cart(), UserScreen(), Home()];
+
   @override
   void initState() {
     super.initState();
     setState(() {
       btmSelectedIndex = widget.btmSelectedIndex;
     });
-    navigateToHome();
+    // navigateToHome();
   }
 
+  //fromsplash to home
   navigateToHome() async {
     if (widget.firstLoad) {
       await Future.delayed(Duration(seconds: 3), () {});
@@ -93,9 +110,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return insplashScreen
-        ? SplashScreen()
-        : Directionality(
+    return
+        // insplashScreen
+        //     ? SplashScreen()
+        //     :
+        Directionality(
             textDirection: TextDirection.ltr,
             child: Scaffold(
               backgroundColor: Color.fromRGBO(245, 245, 245, 1),
